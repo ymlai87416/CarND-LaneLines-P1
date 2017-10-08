@@ -54,7 +54,7 @@ In the following, I am going to present the above step one by one.
 #### 1.1  Remove unwanted object using color
 The colors of the lane in our experience is either yellow or white, so we are going to remove any part of the picture which is not in yellow or white, here is the resulting image.
 
-![alt text][image1]
+![alt text][image1 =480x]
 In the above image, you can see that only the lane lines are preserved, while most road surface is removed, and so as the roadsides.
 
 Most of the time, this step can remove most of the part of the image, but there are cases, e.g. the road color is close to white or yellow, which this step cannot remove the surface of the road. Here is the example.
