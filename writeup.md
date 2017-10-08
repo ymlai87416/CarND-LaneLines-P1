@@ -131,11 +131,11 @@ Annotated driving image:
 Annotated driving video:
 Detect solid white line
 
-[![Alt text](./test_images_output/solidWhiteRight.preview.png)](./test_videos_output/solidWhiteRight.mp4)
+[![solidWhiteRight.mp4](./test_images_output/solidWhiteRight.preview.png)](./test_videos_output/solidWhiteRight.mp4)
 
-[![Alt text](./test_images_output/solidYellowLeft.preview.png)](./test_videos_output/solidYellowLeft.mp4)
+[![solidYellowLeft.mp4](./test_images_output/solidYellowLeft.preview.png)](./test_videos_output/solidYellowLeft.mp4)
 
-[![Alt text](./test_images_output/challenge.preview.png)](./test_videos_output/challenge.mp4)
+[![challenge.mp4](./test_images_output/challenge.preview.png)](./test_videos_output/challenge.mp4)
 
 
 The result looks promising in normal cases.
