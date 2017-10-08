@@ -70,12 +70,12 @@ This step is for the later steps, which Canny algorithm and Hough algorithm depe
 #### 1.3  Use Gaussian blur to blur the image
 This step is to remove any unwanted detail and hence the Canny algorithm does not catch fine details on the image, for example, the texture of the road.
 
-![alt text][image4]
+<img src="./writeup_images/solidYellowCurve2.guassian.png" width="480" alt="Guassian" />
 
 #### 1.4  Use Canny algorithm to detect edges
 This step is to convert a gray-scale image to an image with edges highlighted. This step extracts edges which will be processed to become the left and right lane.
 
-![alt text][image5]
+<img src="./writeup_images/solidYellowCurve2.canny.png" width="480" alt="Canny" />
 
 It requires a low and high threshold, but it is not going to be constant throughout the video context. Failure in detecting edges results in missing lane, so an adaptive algorithm is used to enhance the performance of this step.
 
@@ -84,9 +84,9 @@ The image still contains unwanted details, especially on the road-side, running 
 
 We define the possible lane area as a trapezium, after the masking is done, we can see the image is much simpler
 
-![alt text][image6]
+<img src="./writeup_images/solidYellowCurve2.masked.png" width="480" alt="Masked" />
 
-![alt text][image7]
+<img src="./writeup_images/problem.masked.png" width="480" alt="Masked Problem" />
 
 #### 1.6  Use Hough Line algorithm to find line segments
 To this stage, most of the image details are purged, and only the lane line and some noise remain. In this step, Hough line algorithm is used to extract the line segment, in form of (x1, y1, x2, y2)
@@ -105,10 +105,10 @@ By considering this, we label lines segment to be a left lane line or a right la
 We use the median of slope and y-intercept of the line segments labeled as lane lines to determine the final lane lines and draw it to image or video.
 
 Here is the normal case
-![alt text][image8]
+<img src="./writeup_images/solidYellowCurve2.houghline.png" width="480" alt="Hough Line" />
 
 and here is a challenging case, you can see 
-![alt text][image9]
+<img src="./writeup_images/solidYellowCurve2.houghline.png" width="480" alt="Hough Line Problem" />
 
 ### 1.9 Determine the final lane lines
 In the video, sometimes, the frame hit some boundary cases which making the lane line detected deviate from the correct answer. Because this is a video, we can use the result of the previous frames to correct the lane line. 
@@ -118,17 +118,23 @@ The decay rate of the exponential moving average depends on the speed of the car
 ### 2. Result
 Here is the result:
 Annotated driving image:
-![alt text][image10]
-![alt text][image11]
-![alt text][image12]
-![alt text][image13]
-![alt text][image14]
-![alt text][image15]
+<img src="./test_images_output/solidWhiteCurve.jpg" width="480" alt="Solid white curve lane" />
+<img src="./test_images_output/solidWhiteRight.jpg" width="480" alt="Solid White right lane" />
+<img src="./test_images_output/solidYellowCurve.jpg" width="480" alt="Solid Yello curve lane" />
+<img src="./test_images_output/solidYellowCurve2.jpg" width="480" alt="Solid Yellow curve lane 2" />
+<img src="./test_images_output/solidYellowLeft.jpg" width="480" alt="Solid Yello left lane" />
+<img src="./test_images_output/whiteCarLaneSwitch.jpg" width="480" alt="White car lane switch" />
 
 Annotated driving video:
-[link text](./test_videos_output/solidWhiteRight.mp4 "Detect solid white line")
-[link text](./test_videos_output/solidYellowLeft.mp4 "Detect solid yellow line")
-[link text](./test_videos_output/challenge.mp4 "A challenging case")
+Detect solid white line
+<iframe width="854" height="480" src="./test_videos_output/solidWhiteRight.mp4" frameborder="0" allowfullscreen></iframe>
+
+Detect solid yellow line
+<iframe width="854" height="480" src="./test_videos_output/solidYellowLeft.mp4" frameborder="0" allowfullscreen></iframe>
+
+
+A challenging case
+<iframe width="854" height="480" src="./test_videos_output/challenge.mp4" frameborder="0" allowfullscreen></iframe>
 
 The result looks promising in normal cases.
 When processing challenge.mp4, we saw the computed lane lines move forward and backward when the road surface becomes more complex.
