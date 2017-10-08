@@ -54,17 +54,18 @@ In the following, I am going to present the above step one by one.
 #### 1.1  Remove unwanted object using color
 The colors of the lane in our experience is either yellow or white, so we are going to remove any part of the picture which is not in yellow or white, here is the resulting image.
 
-![alt text|medium][image1]
+<img src="./writeup_images/solidYellowCurve2.removecolor.png" width="480" alt="Remove Color Normal" />
+
 In the above image, you can see that only the lane lines are preserved, while most road surface is removed, and so as the roadsides.
 
 Most of the time, this step can remove most of the part of the image, but there are cases, e.g. the road color is close to white or yellow, which this step cannot remove the surface of the road. Here is the example.
 
-![alt text][image2]
+<img src="./writeup_images/problem.removecolor.png" width="480" alt="Remove Color Problem" />
 
 #### 1.2 Convert the image to grayscale
 This step is for the later steps, which Canny algorithm and Hough algorithm depends on gray-scale image
 
-![alt text][image3]
+<img src="./writeup_images/solidYellowCurve2.grayscale.png" width="480" alt="Grayscale" />
 
 #### 1.3  Use Gaussian blur to blur the image
 This step is to remove any unwanted detail and hence the Canny algorithm does not catch fine details on the image, for example, the texture of the road.
