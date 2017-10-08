@@ -105,9 +105,11 @@ By considering this, we label lines segment to be a left lane line or a right la
 We use the median of slope and y-intercept of the line segments labeled as lane lines to determine the final lane lines and draw it to image or video.
 
 Here is the normal case
+
 <img src="./writeup_images/solidYellowCurve2.houghline.png" width="480" alt="Hough Line" />
 
 and here is a challenging case, you can see 
+
 <img src="./writeup_images/solidYellowCurve2.houghline.png" width="480" alt="Hough Line Problem" />
 
 ### 1.9 Determine the final lane lines
@@ -118,6 +120,7 @@ The decay rate of the exponential moving average depends on the speed of the car
 ### 2. Result
 Here is the result:
 Annotated driving image:
+
 <img src="./test_images_output/solidWhiteCurve.jpg" width="480" alt="Solid white curve lane" />
 <img src="./test_images_output/solidWhiteRight.jpg" width="480" alt="Solid White right lane" />
 <img src="./test_images_output/solidYellowCurve.jpg" width="480" alt="Solid Yello curve lane" />
@@ -127,14 +130,13 @@ Annotated driving image:
 
 Annotated driving video:
 Detect solid white line
-<iframe width="854" height="480" src="./test_videos_output/solidWhiteRight.mp4" frameborder="0" allowfullscreen></iframe>
 
-Detect solid yellow line
-<iframe width="854" height="480" src="./test_videos_output/solidYellowLeft.mp4" frameborder="0" allowfullscreen></iframe>
+[![Alt text](./test_images_output/solidWhiteRight.preview.png)](./test_videos_output/solidWhiteRight.mp4)
 
+[![Alt text](./test_images_output/solidYellowLeft.preview.png)](./test_videos_output/solidYellowLeft.mp4)
 
-A challenging case
-<iframe width="854" height="480" src="./test_videos_output/challenge.mp4" frameborder="0" allowfullscreen></iframe>
+[![Alt text](./test_images_output/challenge.preview.png)](./test_videos_output/challenge.mp4)
+
 
 The result looks promising in normal cases.
 When processing challenge.mp4, we saw the computed lane lines move forward and backward when the road surface becomes more complex.
