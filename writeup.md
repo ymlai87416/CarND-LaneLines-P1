@@ -86,7 +86,7 @@ We define the possible lane area as a trapezium, after the masking is done, we c
 
 <img src="./writeup_images/solidYellowCurve2.masked.png" width="480" alt="Masked" />
 
-Unfortunately, road surface can have texture which Gaussian blur in step 3 cannot remove.
+Unfortunately, road surface can have texture/shadow which Gaussian blur in step 3 cannot remove.
 
 <img src="./writeup_images/problem.masked.png" width="480" alt="Masked Problem" />
 
