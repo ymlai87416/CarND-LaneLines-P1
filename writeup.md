@@ -174,7 +174,6 @@ How about removing the road surface in front of the car? Doing this result in a 
 ### 4. Suggest possible improvements to the proposed pipeline
 
 1. Improving runtime of the lane detection algorithm. The pipeline made use of median instead of average to find the slope and y-intercept for both lane lines. It is because slope goes near to infinity when a line is nearly vertical and by averaging makes the result close to infinity and hence a vertical line is returned as a lane line which is incorrect.
-
 I also want to have more weighting if the line is long, result in finding the median in a big number list.
 
 2. Adaptive masking to find lane if the car is not in the center of the lane. In this project, we only use video where the car is driving in the center of the lane, hence I don't need to worry about if I accidentally mask away the lane line. This should not be the case in the real situation.
