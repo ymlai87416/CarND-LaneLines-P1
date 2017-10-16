@@ -16,7 +16,7 @@ import sys
 base = 'Win32GUI' if sys.platform=='win32' else None
 
 executables = [
-    Executable(r'C:\GitProjects\CarND-LaneLines-P1\app\testDualVideo\video.py', base=base, targetName = 'main.exe')
+    Executable(r'C:\GitProjects\CarND-LaneLines-P1\app\main.py', base=base, targetName = 'car_lane.exe')
 ]
 
 setup(name='self driving - detecting lanes',

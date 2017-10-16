@@ -571,21 +571,20 @@ class MainWindow(QMainWindow):
                 self.mediaPlayerLeft.setMedia(
                         QMediaContent(QUrl.fromLocalFile(LeftFileName)))
 
-                if False:
-                    try:
-                        self.statusBar().showMessage("Processing")
-                        rightFilename = Application().processVideo(LeftFileName)
-                        Application().logger.info("output file name is: "+rightFilename)
-                        self.statusBar().showMessage("Ready")
-                    except Exception as ex:
-                        rightFilename = None
-                        self.statusBar().showMessage("Error in processing video")
-                        traceback.print_exc()
-                        Application().logger.error("Error in processing video", exc_info=True)
+                try:
+                    self.statusBar().showMessage("Processing")
+                    rightFilename = Application().processVideo(LeftFileName)
+                    Application().logger.info("output file name is: "+rightFilename)
+                    self.statusBar().showMessage("Ready")
+                except Exception as ex:
+                    rightFilename = None
+                    self.statusBar().showMessage("Error in processing video")
+                    traceback.print_exc()
+                    Application().logger.error("Error in processing video", exc_info=True)
 
-                    if rightFilename != None:
-                        self.mediaPlayerRight.setMedia(
-                            QMediaContent(QUrl.fromLocalFile(rightFilename)))
+                if rightFilename != None:
+                    self.mediaPlayerRight.setMedia(
+                        QMediaContent(QUrl.fromLocalFile(rightFilename)))
 
                 self.playButton.setEnabled(True)
             else:

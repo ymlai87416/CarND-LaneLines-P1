@@ -17,10 +17,10 @@ class VideoWindow(QMainWindow):
         self.setWindowTitle("PyQt Video Player Widget Example - pythonprogramminglanguage.com") 
         
         self.mediaPlayerLeft = QMediaPlayer(None, QMediaPlayer.VideoSurface)
-        self.mediaPlayerRight = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+        #self.mediaPlayerRight = QMediaPlayer(None, QMediaPlayer.VideoSurface)
 
         videoWidgetLeft = QVideoWidget()
-        videoWidgetRight = QVideoWidget()
+        #videoWidgetRight = QVideoWidget()
 
         self.playButton = QPushButton()
         self.playButton.setEnabled(False)
@@ -64,12 +64,13 @@ class VideoWindow(QMainWindow):
         controlLayout.addWidget(self.playButton)
         controlLayout.addWidget(self.positionSlider)
 
-        layoutLR = QHBoxLayout()
-        layoutLR.addWidget(videoWidgetLeft)
-        layoutLR.addWidget(videoWidgetRight)
+        #layoutLR = QHBoxLayout()
+        #layoutLR.addWidget(videoWidgetLeft)
+        #layoutLR.addWidget(videoWidgetRight)
 
         layout = QVBoxLayout()
-        layout.addLayout(layoutLR)
+        #layout.addLayout(layoutLR)
+        layout.addWidget(videoWidgetLeft)
         layout.addLayout(controlLayout)
         layout.addWidget(self.errorLabel)
 
@@ -82,46 +83,54 @@ class VideoWindow(QMainWindow):
         self.mediaPlayerLeft.durationChanged.connect(self.durationChanged)
         self.mediaPlayerLeft.error.connect(self.handleError)
 
-        self.mediaPlayerRight.setVideoOutput(videoWidgetRight)
-        self.mediaPlayerRight.stateChanged.connect(self.mediaStateChanged)
+        #self.mediaPlayerRight.setVideoOutput(videoWidgetRight)
+        #self.mediaPlayerRight.stateChanged.connect(self.mediaStateChanged)
         #self.mediaPlayerRight.positionChanged.connect(self.positionChanged)    use left as standard
         #self.mediaPlayerRight.durationChanged.connect(self.durationChanged)    use left as standard
-        self.mediaPlayerRight.error.connect(self.handleError)
+        #self.mediaPlayerRight.error.connect(self.handleError)
 
     def openFile(self):
-        fileName, _ = QFileDialog.getOpenFileName(self, "Open Left Movie",
-                QDir.homePath())
 
-        if fileName != '':
-            self.mediaPlayerLeft.setMedia(
-                    QMediaContent(QUrl.fromLocalFile(fileName)))
-            self.playButton.setEnabled(True)
-        else:
-            return
+        try:
+            fileName, _ = QFileDialog.getOpenFileName(self, "Open Left Movie",
+                    QDir.homePath())
 
-        fileName, _ = QFileDialog.getOpenFileName(self, "Open Right Movie",
-                                                  QDir.homePath())
+            if fileName != '':
+                self.mediaPlayerLeft.setMedia(
+                        QMediaContent(QUrl.fromLocalFile(fileName)))
+                self.playButton.setEnabled(True)
+            else:
+                return
 
-        if fileName != '':
-            self.mediaPlayerRight.setMedia(
-                QMediaContent(QUrl.fromLocalFile(fileName)))
-            self.playButton.setEnabled(True)
-        else:
-            return
+            if False:
+
+                fileName, _ = QFileDialog.getOpenFileName(self, "Open Right Movie",
+                                                          QDir.homePath())
+
+                if fileName != '':
+                    self.mediaPlayerRight.setMedia(
+                        QMediaContent(QUrl.fromLocalFile(fileName)))
+                    self.playButton.setEnabled(True)
+                else:
+                    return
+        except Exception as ex:
+            logger.error("error in open video", ex)
 
     def exitCall(self):
         sys.exit(app.exec_())
         
     def play(self):
-        if (self.mediaPlayerLeft.state() == QMediaPlayer.PlayingState or self.mediaPlayerRight.state() == QMediaPlayer.PlayingState):
+        #if (self.mediaPlayerLeft.state() == QMediaPlayer.PlayingState or self.mediaPlayerRight.state() == QMediaPlayer.PlayingState):
+        if (self.mediaPlayerLeft.state() == QMediaPlayer.PlayingState):
             self.mediaPlayerLeft.pause()
-            self.mediaPlayerRight.pause()
+            #self.mediaPlayerRight.pause()
         else:
             self.mediaPlayerLeft.play()
-            self.mediaPlayerRight.play()
+            #self.mediaPlayerRight.play()
 
     def mediaStateChanged(self, state):
-        if (self.mediaPlayerLeft.state() == QMediaPlayer.PlayingState or self.mediaPlayerRight.state() == QMediaPlayer.PlayingState):
+        #if (self.mediaPlayerLeft.state() == QMediaPlayer.PlayingState or self.mediaPlayerRight.state() == QMediaPlayer.PlayingState):
+        if (self.mediaPlayerLeft.state() == QMediaPlayer.PlayingState):
             self.playButton.setIcon(
                     self.style().standardIcon(QStyle.SP_MediaPause))
         else:
@@ -136,14 +145,45 @@ class VideoWindow(QMainWindow):
 
     def setPosition(self, position):
         self.mediaPlayerLeft.setPosition(position)
-        self.mediaPlayerRight.setPosition(position)
+        #self.mediaPlayerRight.setPosition(position)
 
     def handleError(self):
         self.playButton.setEnabled(False)
-        self.errorLabel.setText("Error: " + self.mediaPlayer.errorString())
+        self.errorLabel.setText("Error: " + self.mediaPlayerLeft.errorString())
 
 
 if __name__ == '__main__':
+    if False:
+        import traceback
+        import logging
+
+        logger = logging.getLogger("CarND-LaneLines-P1")
+        logger.setLevel(logging.INFO)
+        handler = logging.FileHandler('application.log')
+        handler.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+
+        if True:
+            import sys
+
+            def my_except_hook(exctype, value, traceback_):
+                file = open("application.log", "a")
+                file.write("\n".join(traceback.format_exception(exctype, value, traceback_)))
+                file.close()
+                if exctype == KeyboardInterrupt:
+                    print('shit')
+                else:
+                    sys.__excepthook__(exctype, value, traceback)
+                sys.exit(-1)
+
+            sys.excepthook = my_except_hook
+
+        # redirect stdout
+        sys.stdout = open('stdout.log', 'w')
+        sys.stderr = open('stderr.log', 'w')
+
     app = QApplication(sys.argv)
     player = VideoWindow()
     player.resize(640, 480)
