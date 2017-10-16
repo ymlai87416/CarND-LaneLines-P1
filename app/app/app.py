@@ -157,7 +157,7 @@ final_output = $str_final_output'''
                 try:
                     if key == 'color_filter':
                         setting.color_filter = value.lower()
-                    elif key == 'color_filter':
+                    elif key == 'color_filter_hsv_low':
                         setting.color_filter_hsv_low = parseListTuple3(value)
                     elif key == 'color_filter_hsv_high':
                         setting.color_filter_hsv_high = parseListTuple3(value)
